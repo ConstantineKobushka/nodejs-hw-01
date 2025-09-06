@@ -3,10 +3,16 @@ import { readContacts } from '../utils/readContacts.js';
 import { writeContacts } from '../utils/writeContacts.js';
 
 const generateContacts = async (number) => {
-  const contactsList = await readContacts();
-  const newContacts = Array(number).fill(0).map(createFakeContact);
-  const newContactsList = [...contactsList, ...newContacts];
-  await writeContacts(newContactsList);
+  try {
+    const contacts = await readContacts();
+    const newContacts = Array(number)
+      .fill(0)
+      .map(() => createFakeContact());
+    const updatedContacts = [...contacts, ...newContacts];
+    await writeContacts(updatedContacts);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 generateContacts(5);
