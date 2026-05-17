@@ -8,7 +8,7 @@ export const addOneContact = async () => {
     contacts.push(createFakeContact());
     await writeContacts(contacts);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
 
